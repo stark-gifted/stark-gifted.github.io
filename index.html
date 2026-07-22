@@ -1,442 +1,322 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STARK QUANTUM LAB · 과학영재 교육 컨설팅</title>
-<meta name="description" content="과학 영재를 위한 탐구 설계와 진학 컨설팅. 영재성 검사, R&E 연구 지도, 영재고·과학고 대비, IB·AI·인문 교육까지.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#101F33;
-  --ink-2:#4A5A6B;
-  --paper:#F3F4EF;
-  --card:#FFFFFF;
-  --rule:#D7DAD1;
-  --grid:rgba(16,31,51,.055);
-
-  --s-violet:#5B3FD6;
-  --s-teal:#0E9FA8;
-  --s-amber:#D9891A;
-  --s-magenta:#BE2E6C;
-  --s-green:#2F8F4E;
-  --s-blue:#2454B8;
-
-  --serif:"Gowun Batang", serif;
-  --sans:"IBM Plex Sans KR", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, monospace;
-
-  --wrap:1120px;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:78px}
-body{
-  margin:0;
-  background:var(--paper);
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size:26px 26px;
-  color:var(--ink);
-  font-family:var(--sans);
-  font-weight:400;
-  line-height:1.75;
-  -webkit-font-smoothing:antialiased;
-}
-img{max-width:100%;display:block}
-a{color:inherit}
-
-.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
-
-/* ---------- 스펙트럼 시그니처 ---------- */
-.spectrum{display:flex;align-items:flex-end;gap:3px;height:64px;overflow:hidden}
-.spectrum i{display:block;width:2px;border-radius:1px;flex:0 0 auto;transform-origin:bottom;animation:emit .9s cubic-bezier(.2,.8,.3,1) backwards}
-@keyframes emit{from{transform:scaleY(0);opacity:0}to{transform:scaleY(1);opacity:1}}
-
-/* ---------- 헤더 ---------- */
-header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(243,244,239,.88);
-  backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--rule);
-}
-.bar{display:flex;align-items:center;gap:28px;height:70px}
-.mark{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
-.mark .dot{width:11px;height:22px;background:linear-gradient(180deg,var(--s-violet),var(--s-teal));border-radius:1px}
-.mark b{font-family:var(--mono);font-weight:500;font-size:14px;letter-spacing:.14em}
-.mark span{font-size:11px;color:var(--ink-2);letter-spacing:.06em;display:block;font-family:var(--sans)}
-nav{display:flex;gap:26px;align-items:center}
-nav a{font-size:14px;text-decoration:none;color:var(--ink-2);padding-bottom:2px;border-bottom:1px solid transparent}
-nav a:hover{color:var(--ink);border-bottom-color:var(--ink)}
-nav a.cta{
-  background:var(--ink);color:var(--paper);border:none;
-  padding:9px 16px;border-radius:2px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;
-}
-nav a.cta:hover{background:var(--s-violet)}
-.menu-toggle{display:none}
-
-/* ---------- 히어로 ---------- */
-.hero{padding:84px 0 72px;border-bottom:1px solid var(--rule)}
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
-.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;color:var(--s-violet);margin:0 0 20px}
-h1{
-  font-family:var(--serif);font-weight:700;
-  font-size:clamp(34px,5vw,58px);line-height:1.24;letter-spacing:-.02em;
-  margin:0 0 24px;
-}
-h1 em{font-style:normal;position:relative;white-space:nowrap}
-h1 em::after{content:"";position:absolute;left:0;right:0;bottom:.08em;height:.28em;background:rgba(91,63,214,.16);z-index:-1}
-.lede{font-size:16.5px;color:var(--ink-2);max-width:46ch;margin:0 0 34px}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{
-  display:inline-block;text-decoration:none;font-size:14px;
-  padding:13px 24px;border-radius:2px;border:1px solid var(--ink);
-  transition:transform .15s ease, background .15s ease;
-}
-.btn-solid{background:var(--ink);color:var(--paper)}
-.btn-solid:hover{background:var(--s-violet);border-color:var(--s-violet);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--ink)}
-.btn-ghost:hover{background:rgba(16,31,51,.06)}
-.hero-card{border:1px solid var(--rule);background:var(--card);padding:14px;box-shadow:0 1px 0 var(--rule)}
-.hero-card img{width:100%}
-.hero-card figcaption{font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.06em;padding-top:12px;border-top:1px solid var(--rule);margin-top:14px}
-.hero .spectrum{margin-top:46px;opacity:.9}
-
-/* ---------- 섹션 공통 ---------- */
-section{padding:82px 0;border-bottom:1px solid var(--rule)}
-.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px}
-.sec-num{font-family:var(--mono);font-size:12px;color:var(--s-teal);letter-spacing:.1em}
-h2{font-family:var(--serif);font-weight:700;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.01em;margin:0}
-.sec-sub{color:var(--ink-2);font-size:15.5px;max-width:56ch;margin:0 0 44px}
-
-/* ---------- 소개 ---------- */
-.about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about p{font-size:16px;margin:0 0 20px}
-.about p.first::first-letter{
-  font-family:var(--serif);font-size:3.1em;line-height:.9;float:left;
-  padding:6px 12px 0 0;color:var(--s-violet);
-}
-.principles{border-top:1px solid var(--rule)}
-.principle{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--rule)}
-.principle .line{width:3px;border-radius:2px}
-.principle h3{font-family:var(--serif);font-size:19px;margin:0 0 6px;font-weight:700}
-.principle p{font-size:14.5px;color:var(--ink-2);margin:0}
-.note{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);letter-spacing:.03em;margin-top:22px}
-
-/* ---------- 프로그램 그리드 ---------- */
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.tile{
-  background:var(--card);padding:30px 26px 26px;min-height:196px;
-  display:flex;flex-direction:column;text-decoration:none;position:relative;
-  transition:background .18s ease;
-}
-.tile:hover{background:#FCFCFA}
-.tile .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.tile .code{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-2)}
-.tile h3{font-family:var(--serif);font-weight:700;font-size:20px;margin:0 0 10px;line-height:1.4}
-.tile p{font-size:13.8px;color:var(--ink-2);margin:0}
-.tile .bar{position:absolute;left:0;top:0;width:100%;height:3px}
-.tile .go{margin-top:auto;padding-top:16px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em}
-.tile.ready .go{color:var(--s-violet)}
-.tile.ready:hover .go{text-decoration:underline}
-.badge{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
-  border:1px solid var(--rule);padding:3px 8px;border-radius:2px;color:var(--ink-2);
-}
-.tile.ready .badge{border-color:var(--s-violet);color:var(--s-violet)}
-.tile.soon{opacity:.72}
-.tile.soon .go{color:var(--ink-2)}
-
-/* ---------- 검사 배너 ---------- */
-.check{background:var(--ink);color:var(--paper);border-bottom:none}
-.check .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
-.check h2{color:var(--paper)}
-.check .sec-num{color:var(--s-amber)}
-.check p{color:#B9C4D0;font-size:15.5px;max-width:44ch;margin:14px 0 30px}
-.check .btn-solid{background:var(--paper);color:var(--ink);border-color:var(--paper)}
-.check .btn-solid:hover{background:var(--s-amber);border-color:var(--s-amber);color:var(--ink)}
-.facts{display:grid;gap:1px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.16)}
-.fact{background:var(--ink);padding:18px 20px;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
-.fact dt{font-size:13.5px;color:#B9C4D0;margin:0}
-.fact dd{font-family:var(--mono);font-size:14px;margin:0;letter-spacing:.04em}
-
-/* ---------- 푸터 ---------- */
-footer{padding:56px 0 44px}
-.foot{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
-.foot .mono{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.05em;line-height:2}
-.foot h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--ink);margin:0 0 10px;font-weight:500}
-.copy{border-top:1px solid var(--rule);margin-top:40px;padding-top:20px;font-family:var(--mono);font-size:11px;color:var(--ink-2);letter-spacing:.05em}
-
-@media (max-width:900px){
-  .hero-grid,.about,.check .wrap{grid-template-columns:1fr;gap:36px}
-  .grid{grid-template-columns:repeat(2,1fr)}
-  .hero{padding:56px 0 48px}
-  section{padding:60px 0}
-  nav a:not(.cta){display:none}
-}
-@media (max-width:560px){
-  .grid{grid-template-columns:1fr}
-  .mark span{display:none}
-}
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  html{scroll-behavior:auto}
-}
-:focus-visible{outline:2px solid var(--s-violet);outline-offset:3px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스타크 영재 파트너스 - 영재성 및 R&E 역량 진단</title>
+    <!-- Chart.js CDN (결과 그래프용) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --box-bg: #1a1c23;
+            --gold: #d4af37;
+            --text-main: #f0f0f0;
+            --text-sub: #a0a0a0;
+        }
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: var(--gold);
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+        .header p {
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .category-title {
+            color: var(--gold);
+            font-size: 18px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+            padding-left: 10px;
+        }
+        .question-box {
+            background-color: var(--box-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .question-text {
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .options label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+        .options input[type="radio"] {
+            margin-bottom: 5px;
+            accent-color: var(--gold);
+            transform: scale(1.2);
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--gold);
+            color: #000;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            margin-top: 40px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-submit:hover {
+            background-color: #b5952f;
+        }
+        #result-section {
+            display: none;
+            background-color: var(--box-bg);
+            padding: 40px 20px;
+            border-radius: 8px;
+            margin-top: 40px;
+            border: 1px solid var(--gold);
+            text-align: center;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 400px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .result-text {
+            margin-top: 30px;
+            font-size: 15px;
+            line-height: 1.8;
+            text-align: left;
+            color: var(--text-main);
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap bar">
-    <a class="mark" href="#top">
-      <span class="dot" aria-hidden="true"></span>
-      <span>
-        <b>STARK QUANTUM LAB</b>
-        <span>과학영재 교육 컨설팅</span>
-      </span>
-    </a>
-    <nav>
-      <a href="#about">업체 소개</a>
-      <a href="#programs">교육 과정</a>
-      <a href="#contact">문의</a>
-      <a class="cta" href="test.html">영재성 검사</a>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-
-  <!-- 히어로 -->
-  <div class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">SCIENCE GIFTED EDUCATION · SINCE ○○○○</p>
-        <h1>질문이 <em>스펙트럼</em>이 되는 곳,<br>아이의 과학을 설계합니다.</h1>
-        <p class="lede">정답을 빨리 찾는 훈련 대신, 스스로 문제를 세우고 끝까지 밀고 가는 힘을 기릅니다. 탐구 설계부터 R&amp;E, 영재고·과학고 진학까지 한 흐름으로 연결합니다.</p>
-        <div class="btns">
-          <a class="btn btn-solid" href="test.html">영재성 검사 시작하기</a>
-          <a class="btn btn-ghost" href="#about">업체 소개 보기</a>
-        </div>
-      </div>
-      <figure class="hero-card" style="margin:0">
-        <img src="main-card.png" alt="STARK QUANTUM LAB" onerror="this.style.display='none'">
-        <figcaption>STARK QUANTUM LAB — 탐구 설계 · 진학 컨설팅</figcaption>
-      </figure>
+<div class="container">
+    <div class="header">
+        <h1>STARK GIFTED PARTNERS</h1>
+        <h2>핵심 영재성 및 R&E 역량 자가 진단</h2>
+        <p>각 문항을 읽고, 평소 나의 모습과 가장 가깝다고 생각하는 점수를 선택해 주세요.<br>
+        (1점: 전혀 아니다 ~ 5점: 매우 그렇다)</p>
     </div>
-    <div class="wrap"><div class="spectrum" id="spec" aria-hidden="true"></div></div>
-  </div>
 
-  <!-- 업체 소개 -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">01</span><h2>업체 소개</h2></div>
-      <p class="sec-sub">스타크 퀀텀 랩은 과학에 재능과 흥미를 보이는 학생을 위한 교육 컨설팅 기관입니다.</p>
+    <form id="surveyForm">
+        <div id="questions-container"></div>
+        <button type="button" class="btn-submit" onclick="calculateResult()">진단 결과 분석하기</button>
+    </form>
 
-      <div class="about">
-        <div>
-          <p class="first">아이가 던지는 "왜요?"는 대부분 교실에서 시간 부족을 이유로 접힙니다. 저희는 그 질문을 접지 않고 끝까지 따라가 보는 일을 합니다. 하나의 궁금증을 관찰로, 관찰을 가설로, 가설을 실험 설계와 한 편의 보고서로 이어가는 과정 전체를 학생 옆에서 함께 만듭니다.</p>
-          <p>그래서 수업의 출발점은 진도가 아니라 학생입니다. 먼저 영재성 검사와 상담으로 지금의 강점과 성장 지점을 확인하고, 그 결과 위에 탐구 주제·독서·경시·진학 일정을 얹어 개인별 로드맵을 만듭니다. 로드맵은 학기마다 다시 점검하고 조정합니다.</p>
-          <p>진학은 목표가 아니라 결과로 봅니다. 영재고와 과학고, IB 과정에서 실제로 요구하는 것은 문제를 스스로 정의하고 근거로 설득하는 능력이며, 그 능력은 과학뿐 아니라 역사·철학·AI를 함께 다룰 때 단단해진다고 믿습니다.</p>
-          <p class="note">※ 설립 연도, 대표 강사 이력, 수업 형태 등 확정된 정보를 이 자리에 넣어 주세요.</p>
+    <div id="result-section">
+        <h2 style="color: var(--gold);">[ 분석 완료 ] 나의 영재성 프로파일</h2>
+        <div class="chart-container">
+            <canvas id="resultChart"></canvas>
         </div>
-
-        <div class="principles">
-          <div class="principle">
-            <span class="line" style="background:var(--s-violet)"></span>
-            <div>
-              <h3>진단이 먼저입니다</h3>
-              <p>검사와 상담으로 학생의 탐구 성향·논리력·창의성·과제집착력을 확인한 뒤에 수업을 설계합니다.</p>
-            </div>
-          </div>
-          <div class="principle">
-            <span class="line" style="background:var(--s-teal)"></span>
-            <div>
-              <h3>결과물로 증명합니다</h3>
-              <p>배운 내용은 보고서·포트폴리오·발표라는 형태로 남깁니다. 남는 것이 곧 다음 단계의 근거가 됩니다.</p>
-            </div>
-          </div>
-          <div class="principle">
-            <span class="line" style="background:var(--s-amber)"></span>
-            <div>
-              <h3>과학만 가르치지 않습니다</h3>
-              <p>역사·철학·AI를 함께 다뤄, 자기 연구가 어떤 맥락에 서 있는지 설명할 수 있는 학생을 기릅니다.</p>
-            </div>
-          </div>
-          <div class="principle">
-            <span class="line" style="background:var(--s-magenta)"></span>
-            <div>
-              <h3>속도보다 방향입니다</h3>
-              <p>선행 진도 대신 학생이 지금 감당할 수 있는 난이도에서 깊이를 만듭니다.</p>
-            </div>
-          </div>
+        <div class="result-text" id="result-feedback">
+            <!-- 결과 텍스트가 여기에 표시됩니다 -->
         </div>
-      </div>
     </div>
-  </section>
-
-  <!-- 교육 과정 -->
-  <section id="programs">
-    <div class="wrap">
-      <div class="sec-head"><span class="sec-num">02</span><h2>교육 과정</h2></div>
-      <p class="sec-sub">각 과정은 순차 코스가 아니라, 진단 결과에 따라 조합해 쓰는 모듈입니다. 준비 중인 페이지는 순차적으로 열립니다.</p>
-
-      <div class="grid">
-        <a class="tile ready" href="#about">
-          <span class="bar" style="background:var(--s-violet)"></span>
-          <span class="top"><span class="code">C-01</span><span class="badge">공개</span></span>
-          <h3>업체 소개</h3>
-          <p>교육 철학, 수업이 진행되는 방식, 상담 절차를 소개합니다.</p>
-          <span class="go">아래에서 보기 →</span>
-        </a>
-
-        <a class="tile ready" href="test.html">
-          <span class="bar" style="background:var(--s-amber)"></span>
-          <span class="top"><span class="code">C-02</span><span class="badge">공개</span></span>
-          <h3>영재성 검사지</h3>
-          <p>24문항에 답하면 네 개 영역의 결과와 해석이 바로 나옵니다.</p>
-          <span class="go">검사 시작하기 →</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-teal)"></span>
-          <span class="top"><span class="code">C-03</span><span class="badge">준비 중</span></span>
-          <h3>과학자들 소개</h3>
-          <p>한 사람의 연구가 어떤 질문에서 시작됐는지 따라가 봅니다.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-blue)"></span>
-          <span class="top"><span class="code">C-04</span><span class="badge">준비 중</span></span>
-          <h3>과학 영재로 가는 길</h3>
-          <p>단계별 학습 경로와 참고 영상·자료를 모아 둡니다.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-green)"></span>
-          <span class="top"><span class="code">C-05</span><span class="badge">준비 중</span></span>
-          <h3>현재 과학 동향</h3>
-          <p>지금 학계에서 일어나는 일을 학생 눈높이로 정리합니다.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-magenta)"></span>
-          <span class="top"><span class="code">C-06</span><span class="badge">준비 중</span></span>
-          <h3>R&amp;E 논문 · 자료 모음</h3>
-          <p>연구 주제 잡기부터 보고서 형식까지, 실제 사례로 익힙니다.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-violet)"></span>
-          <span class="top"><span class="code">C-07</span><span class="badge">준비 중</span></span>
-          <h3>영재고 · 과학고 기출 유사 문제</h3>
-          <p>유형별 문제와 풀이, 그리고 왜 그렇게 접근하는지의 설명.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-amber)"></span>
-          <span class="top"><span class="code">C-08</span><span class="badge">준비 중</span></span>
-          <h3>역사 · 철학 교육</h3>
-          <p>과학이 놓인 맥락을 읽고 자기 언어로 논증하는 훈련.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-teal)"></span>
-          <span class="top"><span class="code">C-09</span><span class="badge">준비 중</span></span>
-          <h3>IB 교육</h3>
-          <p>MYP·DP 과학 과목과 EE·IA 작성 지도.</p>
-          <span class="go">준비 중</span>
-        </a>
-
-        <a class="tile soon" href="#" aria-disabled="true">
-          <span class="bar" style="background:var(--s-blue)"></span>
-          <span class="top"><span class="code">C-10</span><span class="badge">준비 중</span></span>
-          <h3>AI 교육</h3>
-          <p>도구로서의 AI, 그리고 연구에 쓰는 방법을 다룹니다.</p>
-          <span class="go">준비 중</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 검사 배너 -->
-  <section class="check">
-    <div class="wrap">
-      <div>
-        <div class="sec-head"><span class="sec-num">03</span><h2>영재성 검사</h2></div>
-        <p>탐구 성향, 논리·수리적 사고, 창의성, 과제집착력 네 영역을 24문항으로 살펴봅니다. 제출하는 곳 없이 브라우저에서 바로 결과가 계산됩니다.</p>
-        <div class="btns"><a class="btn btn-solid" href="test.html">검사 시작하기</a></div>
-      </div>
-      <dl class="facts">
-        <div class="fact"><dt>문항 수</dt><dd>24</dd></div>
-        <div class="fact"><dt>소요 시간</dt><dd>약 7분</dd></div>
-        <div class="fact"><dt>대상</dt><dd>초4 – 중3</dd></div>
-        <div class="fact"><dt>결과 확인</dt><dd>즉시</dd></div>
-      </dl>
-    </div>
-  </section>
-
-</main>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="foot">
-      <div>
-        <h4>CONTACT</h4>
-        <div class="mono">
-          전화 ○○○-○○○○-○○○○<br>
-          이메일 ○○○@○○○.com<br>
-          상담 시간 ○요일 ○○:○○ – ○○:○○
-        </div>
-      </div>
-      <div>
-        <h4>LOCATION</h4>
-        <div class="mono">○○시 ○○구 ○○로 ○○<br>○○빌딩 ○층</div>
-      </div>
-      <div>
-        <h4>MENU</h4>
-        <div class="mono">
-          <a href="#about" style="text-decoration:none">업체 소개</a><br>
-          <a href="#programs" style="text-decoration:none">교육 과정</a><br>
-          <a href="test.html" style="text-decoration:none">영재성 검사</a>
-        </div>
-      </div>
-    </div>
-    <div class="copy">© STARK QUANTUM LAB. ALL RIGHTS RESERVED.</div>
-  </div>
-</footer>
+</div>
 
 <script>
-// 방출 스펙트럼 시그니처
-(function(){
-  var el = document.getElementById('spec');
-  if(!el) return;
-  var colors = ['--s-violet','--s-blue','--s-teal','--s-green','--s-amber','--s-magenta'];
-  var css = getComputedStyle(document.documentElement);
-  var n = Math.min(120, Math.floor(el.clientWidth / 7));
-  var frag = document.createDocumentFragment();
-  for(var i=0;i<n;i++){
-    var t = i/(n-1);
-    var c = css.getPropertyValue(colors[Math.min(colors.length-1, Math.floor(t*colors.length))]).trim();
-    var line = document.createElement('i');
-    var h = 12 + Math.abs(Math.sin(i*1.7)) * 40 + (i%9===0 ? 12 : 0);
-    line.style.height = h.toFixed(0)+'px';
-    line.style.background = c;
-    line.style.opacity = (0.28 + Math.abs(Math.cos(i*0.9))*0.62).toFixed(2);
-    line.style.animationDelay = (i*9)+'ms';
-    frag.appendChild(line);
-  }
-  el.appendChild(frag);
-})();
+    // 중학교 1학년 수준에 맞춘 40개의 질문 리스트 (4개 영역 x 10문제)
+    const questions = [
+        // 영역 1: 학술적 호기심 & 과제 집착력 (Q1 ~ Q10)
+        { category: 0, text: "내가 좋아하는 과학이나 수학 주제가 생기면 시간 가는 줄 모르고 찾아본다." },
+        { category: 0, text: "어려운 수학 문제나 과학 원리를 만났을 때, 정답을 볼 때까지 포기하고 싶지 않다." },
+        { category: 0, text: "학교에서 안 배운 내용이라도 궁금하면 유튜브나 책을 찾아본다." },
+        { category: 0, text: "한 가지 생각에 푹 빠져서 밥 먹는 것이나 노는 것을 잊어버린 적이 있다." },
+        { category: 0, text: "남들이 다 포기한 어려운 숙제나 퍼즐을 끝까지 풀었을 때 큰 뿌듯함을 느낀다." },
+        { category: 0, text: "궁금한 점이 생기면 선생님이나 부모님께 계속 질문해서 답을 알아낸다." },
+        { category: 0, text: "쉬운 문제 10개를 푸는 것보다, 아주 어려운 문제 1개를 푸는 것이 더 재밌다." },
+        { category: 0, text: "좋아하는 실험이나 탐구를 할 때는 피곤한 줄도 모른다." },
+        { category: 0, text: "한 번 시작한 조립이나 만들기는 끝을 봐야 직성이 풀린다." },
+        { category: 0, text: "내가 세운 목표를 달성하기 위해 늦게까지 잠을 안 자고 매달릴 수 있다." },
+
+        // 영역 2: 비판적 & 논리적 사고력 (Q11 ~ Q20)
+        { category: 1, text: "뉴스와 유튜브에서 어떤 주장을 들으면 '정말 그럴까?' 하고 먼저 의심해 본다." },
+        { category: 1, text: "친구나 다른 사람의 의견을 들을 때 앞뒤가 안 맞는 점을 잘 찾아낸다." },
+        { category: 1, text: "복잡한 문제를 보면 나만의 규칙이나 순서를 만들어서 정리하는 것을 좋아한다." },
+        { category: 1, text: "'무조건 외워라'라는 말보다 '왜 그렇게 되는지' 이유를 아는 것이 더 좋다." },
+        { category: 1, text: "여러 가지 현상들 사이에서 공통점이나 규칙을 찾는 것을 잘한다." },
+        { category: 1, text: "어떤 결과가 나오면, 그 원인이 무엇일지 단계별로 추리해보는 것을 좋아한다." },
+        { category: 1, text: "내 의견을 말할 때 그냥 우기지 않고 확실한 근거나 이유를 댄다." },
+        { category: 1, text: "학교에서 배우는 과학 법칙들이 어떻게 만들어졌는지 증명해 보는 것이 재밌다." },
+        { category: 1, text: "토론할 때 논리적으로 반박하는 것을 즐긴다." },
+        { category: 1, text: "글을 읽거나 말을 들을 때, 중요한 핵심과 중요하지 않은 것을 잘 구별한다." },
+
+        // 영역 3: 창의성 & 메타인지 (Q21 ~ Q30)
+        { category: 2, text: "공부하다가 막히면, 내가 무엇을 모르고 있는지 정확히 알고 있다." },
+        { category: 2, text: "문제를 풀 때 남들이 다 하는 방법 말고 나만의 새로운 방법으로 푸는 것을 좋아한다." },
+        { category: 2, text: "과제나 보고서를 제출하기 전에, 스스로 부족한 점을 찾아서 고친다." },
+        { category: 2, text: "서로 전혀 상관없어 보이는 두 가지 물건이나 아이디어를 합쳐서 상상하곤 한다." },
+        { category: 2, text: "내가 세운 계획이 잘 안 맞으면, 내 상황에 맞게 계획을 다시 짠다." },
+        { category: 2, text: "틀린 문제가 있으면 왜 틀렸는지 내 생각의 과정을 되짚어 본다." },
+        { category: 2, text: "엉뚱한 상상이나 '만약에 ~라면 어떨까?'라는 생각을 자주 한다." },
+        { category: 2, text: "친구들이 어려워하는 문제를 전혀 다른 각도에서 설명해 준 적이 있다." },
+        { category: 2, text: "내가 잘하는 과목과 부족한 과목을 알고, 그에 맞게 공부 시간을 조절한다." },
+        { category: 2, text: "과학 상상화나 발명품 대회에서 독창적이라는 칭찬을 받은 적이 있다." },
+
+        // 영역 4: 탐구 & 데이터 문해력 (Q31 ~ Q40)
+        { category: 3, text: "복잡한 표나 그래프를 보면 그 안에 숨겨진 의미나 규칙을 찾는 것이 재미있다." },
+        { category: 3, text: "과학 실험을 할 때, 결과를 눈으로 직접 확인해야 직성이 풀린다." },
+        { category: 3, text: "인터넷에서 조사한 숫자나 통계 자료를 표나 그래프로 예쁘게 정리할 수 있다." },
+        { category: 3, text: "내 예상이 틀렸더라도, 실험 결과를 조작하지 않고 사실대로 인정한다." },
+        { category: 3, text: "날씨 변화나 식물 키우기처럼 매일매일 기록해서 변화를 살펴보는 것을 좋아한다." },
+        { category: 3, text: "어려운 설명글보다 그래프나 그림으로 설명되어 있을 때 훨씬 이해가 잘 된다." },
+        { category: 3, text: "친구들에게 무언가를 설명할 때, 정확한 수치나 통계 자료를 보여주면서 말하는 편이다." },
+        { category: 3, text: "컴퓨터로 숫자를 다루거나 데이터를 분석하는 것에 흥미가 있다." },
+        { category: 3, text: "하나의 현상을 관찰하기 위해 조건을 바꿔가며 여러 번 실험해 보고 싶다." },
+        { category: 3, text: "어떤 정보를 볼 때 과거부터 지금까지 어떻게 변해왔는지 흐름을 보는 것을 좋아한다." }
+    ];
+
+    const categoryNames = [
+        "학술적 호기심 & 과제 집착력",
+        "비판적 & 논리적 사고력",
+        "창의성 & 메타인지",
+        "탐구 & 데이터 문해력"
+    ];
+
+    // 질문 HTML 동적 생성
+    const container = document.getElementById("questions-container");
+    let currentCategory = -1;
+
+    questions.forEach((q, index) => {
+        if (q.category !== currentCategory) {
+            currentCategory = q.category;
+            const title = document.createElement("div");
+            title.className = "category-title";
+            title.innerText = "■ " + categoryNames[currentCategory];
+            container.appendChild(title);
+        }
+
+        const box = document.createElement("div");
+        box.className = "question-box";
+        box.innerHTML = `
+            <div class="question-text"><strong>Q${index + 1}.</strong> ${q.text}</div>
+            <div class="options">
+                <label><input type="radio" name="q${index}" value="1">전혀 아니다(1)</label>
+                <label><input type="radio" name="q${index}" value="2">아니다(2)</label>
+                <label><input type="radio" name="q${index}" value="3">보통이다(3)</label>
+                <label><input type="radio" name="q${index}" value="4">그렇다(4)</label>
+                <label><input type="radio" name="q${index}" value="5">매우 그렇다(5)</label>
+            </div>
+        `;
+        container.appendChild(box);
+    });
+
+    let chartInstance = null;
+
+    function calculateResult() {
+        const scores = [0, 0, 0, 0];
+        let answeredCount = 0;
+
+        for (let i = 0; i < questions.length; i++) {
+            const radios = document.getElementsByName("q" + i);
+            let answered = false;
+            for (let j = 0; j < radios.length; j++) {
+                if (radios[j].checked) {
+                    scores[questions[i].category] += parseInt(radios[j].value);
+                    answered = true;
+                    answeredCount++;
+                    break;
+                }
+            }
+        }
+
+        if (answeredCount < questions.length) {
+            alert("모든 문항에 답해주세요. (현재 " + answeredCount + " / 40문항 완료)");
+            return;
+        }
+
+        // 결과 영역 표시
+        document.getElementById("result-section").style.display = "block";
+        document.getElementById("result-section").scrollIntoView({ behavior: 'smooth' });
+
+        // 피드백 텍스트 생성
+        const maxScore = Math.max(...scores);
+        const topCategoryIndex = scores.indexOf(maxScore);
+        const topCategoryName = categoryNames[topCategoryIndex];
+
+        let feedbackHtml = `<p>수고하셨습니다. 학생의 진단 결과, <strong>[${topCategoryName}]</strong> 역량이 가장 돋보입니다.</p>`;
+        feedbackHtml += `<p>학생은 단순한 암기를 넘어 스스로 질문을 던지고 데이터를 통해 세상을 이해할 준비가 되어 있습니다. 스타크 영재 파트너스와 함께 학생의 잠재력을 진짜 학술적 결과물(논문 및 R&E)로 폭발시켜 보시기 바랍니다.</p>`;
+        document.getElementById("result-feedback").innerHTML = feedbackHtml;
+
+        // 방사형 그래프 그리기 (Chart.js)
+        const ctx = document.getElementById('resultChart').getContext('2d');
+        
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: categoryNames,
+                datasets: [{
+                    label: '영재성 역량 점수 (50점 만점)',
+                    data: scores,
+                    backgroundColor: 'rgba(212, 175, 55, 0.2)',
+                    borderColor: 'rgba(212, 175, 55, 1)',
+                    pointBackgroundColor: 'rgba(212, 175, 55, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(212, 175, 55, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                        pointLabels: { color: '#f0f0f0', font: { size: 14 } },
+                        ticks: {
+                            min: 0,
+                            max: 50,
+                            stepSize: 10,
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#d4af37' }
+                    }
+                }
+            }
+        });
+    }
 </script>
+
 </body>
 </html>
