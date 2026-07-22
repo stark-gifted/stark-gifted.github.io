@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>영재성 · R&amp;E 역량 진단 · STARK QUANTUM LAB</title>
-<meta name="description" content="학술적 호기심, 비판적 사고, 창의성·메타인지, 탐구·데이터 문해력 네 영역을 40문항으로 진단하고 결과를 즉시 확인합니다.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#101F33; --ink-2:#4A5A6B; --paper:#F3F4EF; --card:#FFFFFF;
-  --rule:#D7DAD1; --grid:rgba(16,31,51,.055);
-  --s-violet:#5B3FD6; --s-teal:#0E9FA8; --s-amber:#D9891A; --s-magenta:#BE2E6C;
+  --ink:#0E1B2C; --ink-2:#49586A; --paper:#F2F3EF; --card:#FFFFFF;
+  --rule:#D6D9D0; --rule-2:#0E1B2C; --grid:rgba(14,27,44,.05);
+  --s-violet:#4F38C9; --s-teal:#0B8E97; --s-amber:#C67C12; --s-magenta:#AC2860;
   --serif:"Gowun Batang", serif;
   --sans:"IBM Plex Sans KR", system-ui, sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, monospace;
@@ -25,9 +25,9 @@ body{
   color:var(--ink);font-family:var(--sans);line-height:1.75;-webkit-font-smoothing:antialiased;
 }
 a{color:inherit}
-.wrap{max-width:840px;margin:0 auto;padding:0 24px}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
 
-header{position:sticky;top:0;z-index:60;background:rgba(243,244,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+header{position:sticky;top:0;z-index:60;background:rgba(242,243,239,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;height:66px;gap:16px}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
 .mark .dot{width:11px;height:22px;background:linear-gradient(180deg,var(--s-violet),var(--s-teal));border-radius:1px}
@@ -38,25 +38,50 @@ header{position:sticky;top:0;z-index:60;background:rgba(243,244,239,.92);backdro
 #progress{height:3px;background:var(--rule)}
 #progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--s-violet),var(--s-teal),var(--s-amber),var(--s-magenta));transition:width .3s ease}
 
-.intro{padding:64px 0 40px}
+/* ---------- 잠금 화면 ---------- */
+#gate{min-height:calc(100vh - 70px);display:flex;align-items:center;justify-content:center;padding:60px 24px}
+.gate-card{
+  width:100%;max-width:460px;background:var(--card);
+  border:1px solid var(--rule);border-top:3px solid var(--ink);
+  padding:44px 40px 36px;box-shadow:0 2px 0 var(--rule);
+}
+.gate-card .eyebrow{margin-bottom:14px}
+.gate-card h1{font-size:clamp(26px,4vw,32px);margin-bottom:14px}
+.gate-card p{color:var(--ink-2);font-size:14.5px;margin:0 0 26px}
+.gate-card label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--ink-2);display:block;margin-bottom:8px}
+.gate-row{display:flex;gap:10px}
+.gate-row input{
+  flex:1;font-family:var(--mono);font-size:16px;letter-spacing:.1em;
+  padding:13px 15px;border:1px solid var(--rule);border-radius:2px;background:#FCFCFA;color:var(--ink);
+}
+.gate-row input:focus{border-color:var(--ink);outline:none}
+.gate-row button{
+  font-family:var(--sans);font-size:14.5px;padding:0 22px;border-radius:2px;
+  border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:background .15s;
+}
+.gate-row button:hover{background:var(--s-violet);border-color:var(--s-violet)}
+.gate-row button:disabled{opacity:.4;cursor:not-allowed}
+#gateMsg{font-family:var(--mono);font-size:12.5px;color:var(--s-magenta);min-height:24px;margin-top:14px;letter-spacing:.02em}
+.gate-foot{border-top:1px solid var(--rule);margin-top:26px;padding-top:18px;font-family:var(--mono);font-size:11px;color:var(--ink-2);line-height:2;letter-spacing:.03em}
+
+/* ---------- 공통 ---------- */
+#app{display:none}
+#app.on{display:block}
 .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;color:var(--s-violet);margin:0 0 18px}
-h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,46px);line-height:1.3;margin:0 0 20px;letter-spacing:-.02em}
-.lede{color:var(--ink-2);font-size:16px;margin:0 0 28px;max-width:56ch}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,44px);line-height:1.3;margin:0 0 20px;letter-spacing:-.02em}
+.intro{padding:60px 0 40px}
+.lede{color:var(--ink-2);font-size:16px;margin:0 0 28px;max-width:58ch}
 .meta{display:flex;flex-wrap:wrap;border:1px solid var(--rule);background:var(--rule);gap:1px;margin-bottom:34px}
 .meta div{background:var(--card);padding:14px 18px;flex:1 1 130px}
 .meta dt{font-size:12px;color:var(--ink-2);margin:0}
 .meta dd{font-family:var(--mono);font-size:15px;margin:2px 0 0}
-
 .who{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px}
 .who label{font-size:12px;color:var(--ink-2);display:block;margin-bottom:6px;font-family:var(--mono);letter-spacing:.08em}
-.who input,.who select{
-  font-family:var(--sans);font-size:15px;padding:11px 14px;border:1px solid var(--rule);
-  background:var(--card);color:var(--ink);border-radius:2px;width:100%;
-}
+.who input,.who select{font-family:var(--sans);font-size:15px;padding:11px 14px;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
 .who>div{flex:1 1 200px}
 
 .scale-legend{
-  position:sticky;top:69px;z-index:40;background:rgba(243,244,239,.95);backdrop-filter:blur(6px);
+  position:sticky;top:69px;z-index:40;background:rgba(242,243,239,.95);backdrop-filter:blur(6px);
   display:grid;grid-template-columns:1fr repeat(5,44px);gap:8px;align-items:end;
   padding:12px 0;border-bottom:1px solid var(--rule);
   font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink-2);text-align:center;
@@ -71,14 +96,14 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,46px);lin
 .domain>p{color:var(--ink-2);font-size:14px;margin:0 0 18px}
 
 fieldset{border:0;margin:0;padding:18px 0;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr repeat(5,44px);gap:8px;align-items:center}
-fieldset.miss{background:rgba(190,46,108,.06);box-shadow:-14px 0 0 rgba(190,46,108,.06),14px 0 0 rgba(190,46,108,.06)}
+fieldset.miss{background:rgba(172,40,96,.06);box-shadow:-14px 0 0 rgba(172,40,96,.06),14px 0 0 rgba(172,40,96,.06)}
 legend{float:left;width:100%;font-size:15.5px;padding:0}
 legend .n{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-right:10px}
 fieldset .opt{display:flex;justify-content:center}
 fieldset input{position:absolute;opacity:0;width:0;height:0}
 fieldset .opt span{
-  display:flex;align-items:center;justify-content:center;
-  width:34px;height:34px;border:1px solid var(--rule);border-radius:50%;background:var(--card);
+  display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border:1px solid var(--rule);border-radius:50%;background:var(--card);
   font-family:var(--mono);font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:all .14s ease;
 }
 fieldset .opt:hover span{border-color:var(--ink);color:var(--ink)}
@@ -89,66 +114,79 @@ fieldset input:focus-visible + span{outline:2px solid var(--s-violet);outline-of
 .btn{font-family:var(--sans);font-size:15px;padding:14px 28px;border-radius:2px;border:1px solid var(--ink);cursor:pointer;text-decoration:none;display:inline-block;background:var(--ink);color:var(--paper);transition:background .15s ease}
 .btn:hover{background:var(--s-violet);border-color:var(--s-violet)}
 .btn.ghost{background:transparent;color:var(--ink)}
-.btn.ghost:hover{background:rgba(16,31,51,.06)}
+.btn.ghost:hover{background:rgba(14,27,44,.06)}
 #alert{font-size:13.5px;color:var(--s-magenta);font-family:var(--mono);letter-spacing:.02em}
 
-/* ---------- 결과 ---------- */
+/* ---------- 결과 보고서 ---------- */
 #result{display:none;padding:48px 0 90px}
 #result.on{display:block}
-.result-card{background:var(--card);border:1px solid var(--rule);padding:36px 34px}
-.result-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:20px}
-.result-head h2{font-family:var(--serif);font-size:28px;margin:0;font-weight:700}
-.result-head .who-line{font-family:var(--mono);font-size:12px;color:var(--ink-2);letter-spacing:.04em}
+.report{background:var(--card);border:1px solid var(--rule);border-top:4px solid var(--ink);box-shadow:0 2px 0 var(--rule)}
+.rp-head{padding:34px 38px 24px;border-bottom:1px solid var(--rule-2)}
+.rp-head .doc{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-2);margin-bottom:18px}
+.rp-head h2{font-family:var(--serif);font-size:30px;margin:0 0 6px;font-weight:700}
+.rp-head .sub{font-size:13.5px;color:var(--ink-2)}
+.rp-id{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-top:0}
+.rp-id div{background:#FBFBF9;padding:12px 18px}
+.rp-id dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--ink-2);margin:0}
+.rp-id dd{font-size:14.5px;margin:2px 0 0;font-weight:600}
 
-.radar-block{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center;padding:28px 0;border-bottom:1px solid var(--rule)}
+.rp-sec{padding:32px 38px;border-bottom:1px solid var(--rule)}
+.rp-sec:last-of-type{border-bottom:0}
+.rp-label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ink-2);margin:0 0 18px;font-weight:500}
+
+.radar-block{display:grid;grid-template-columns:1.05fr .95fr;gap:32px;align-items:center}
 .radar-block svg{width:100%;height:auto;display:block}
 .poly{transform-origin:center;animation:grow .9s cubic-bezier(.2,.8,.3,1) backwards}
 @keyframes grow{from{transform:scale(.02);opacity:0}to{transform:scale(1);opacity:1}}
 .legend-list{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
-.legend-list div{background:var(--card);padding:12px 16px;display:flex;align-items:center;gap:10px}
+.legend-list>div{background:var(--card);padding:12px 16px;display:flex;align-items:center;gap:10px}
 .legend-list .sw{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
 .legend-list .nm{font-size:13.5px}
 .legend-list .sc{margin-left:auto;font-family:var(--mono);font-size:14px;white-space:nowrap}
 .legend-list .sc small{color:var(--ink-2);font-size:11px}
+.total-line{display:flex;align-items:baseline;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
+.total-line b{font-family:var(--mono);font-size:46px;font-weight:500;line-height:1}
+.total-line span{font-size:14px;color:var(--ink-2)}
 
-.total{display:flex;align-items:baseline;gap:14px;padding:24px 0;border-bottom:1px solid var(--rule)}
-.total b{font-family:var(--mono);font-size:50px;font-weight:500;line-height:1}
-.total span{font-size:14.5px;color:var(--ink-2)}
+/* 영역별 상세 카드 */
+.dcard{border:1px solid var(--rule);margin-bottom:22px;background:var(--card)}
+.dcard:last-child{margin-bottom:0}
+.dcard-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--rule);border-left:4px solid}
+.dcard-head h3{font-family:var(--serif);font-size:19px;margin:0;font-weight:700}
+.dcard-head .code{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--ink-2)}
+.dcard-head .band{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid currentColor;padding:2px 9px;border-radius:2px;margin-left:auto}
+.dcard-head .sc{font-family:var(--mono);font-size:15px}
+.dcard-body{display:grid;grid-template-columns:220px 1fr;gap:26px;padding:22px}
+.dchart svg{width:100%;height:auto;display:block}
+.dchart figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-2);text-align:center;margin-top:8px}
+.dtext p{font-size:14.5px;margin:0 0 14px;color:var(--ink)}
+.dtext .hl{display:grid;gap:10px;margin-top:4px}
+.dtext .hl div{font-size:13px;color:var(--ink-2);padding-left:14px;border-left:2px solid var(--rule);line-height:1.65}
+.dtext .hl b{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;display:block;color:var(--ink);font-weight:500;margin-bottom:2px}
 
-.row{padding:24px 0;border-bottom:1px solid var(--rule)}
-.row .rt{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px}
-.row .rt h3{font-family:var(--serif);font-size:18px;margin:0;font-weight:700}
-.row .rt .band{font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid var(--rule);padding:2px 8px;border-radius:2px;color:var(--ink-2)}
-.row .rt .pct{margin-left:auto;font-family:var(--mono);font-size:15px}
-.row p{font-size:14.5px;color:var(--ink-2);margin:8px 0 0}
-
-.summary{padding:26px 0 0}
-.summary h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;margin:0 0 10px;color:var(--ink-2);font-weight:500}
 .summary p{margin:0 0 14px;font-size:15px}
-.next{background:var(--ink);color:var(--paper);padding:26px 28px;margin-top:26px}
-.next h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;margin:0 0 12px;color:var(--s-amber);font-weight:500}
-.next p{margin:0 0 10px;font-size:14.5px;color:#C6D0DA}
-.next b{color:var(--paper);font-weight:600}
-.disclaimer{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);line-height:2;margin-top:26px;letter-spacing:.02em}
+.next{background:var(--ink);color:var(--paper);padding:28px 38px}
+.next h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;margin:0 0 14px;color:var(--s-amber);font-weight:500}
+.next p{margin:0 0 10px;font-size:14.5px;color:#C4CEDA}
+.next b{color:#fff;font-weight:600}
+.disclaimer{font-family:var(--mono);font-size:11px;color:var(--ink-2);line-height:2;padding:22px 38px;letter-spacing:.02em;border-top:1px solid var(--rule);background:#FBFBF9}
 
-@media (max-width:760px){
-  .radar-block{grid-template-columns:1fr;gap:22px}
-}
+@media (max-width:780px){.radar-block{grid-template-columns:1fr;gap:22px}.dcard-body{grid-template-columns:1fr}}
 @media (max-width:620px){
   .scale-legend{display:none}
   fieldset{grid-template-columns:1fr;gap:12px}
   fieldset .opts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
   fieldset .opt span{width:100%;border-radius:2px;height:42px}
-  .result-card{padding:26px 20px}
-  .intro{padding:44px 0 30px}
+  .rp-head,.rp-sec,.next,.disclaimer{padding-left:20px;padding-right:20px}
+  .intro{padding:40px 0 30px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 :focus-visible{outline:2px solid var(--s-violet);outline-offset:3px}
 @media print{
-  header,.intro,#quiz,.submit-row{display:none!important}
+  header,#gate,.intro,#quiz,.submit-row{display:none!important}
   body{background:#fff}
   #result{padding:0}
-  .result-card{border:0;padding:0}
+  .report{border:1px solid #ccc;box-shadow:none}
 }
 </style>
 </head>
@@ -157,19 +195,38 @@ fieldset input:focus-visible + span{outline:2px solid var(--s-violet);outline-of
 <header>
   <div class="wrap bar">
     <a class="mark" href="index.html"><span class="dot" aria-hidden="true"></span><b>STARK QUANTUM LAB</b></a>
-    <span class="counter" id="counter">0 / 40</span>
+    <span class="counter" id="counter"></span>
     <a class="back" href="index.html">← 홈으로</a>
   </div>
   <div id="progress"><i></i></div>
 </header>
 
-<main class="wrap">
+<!-- ================= 잠금 화면 ================= -->
+<div id="gate">
+  <div class="gate-card">
+    <p class="eyebrow">RESTRICTED · AUTHORIZED ACCESS ONLY</p>
+    <h1>검사지 접근 인증</h1>
+    <p>이 검사는 상담을 신청한 학생에게만 제공됩니다. 안내받은 접근 번호를 입력해 주세요.</p>
+    <label for="pw">ACCESS CODE</label>
+    <div class="gate-row">
+      <input id="pw" type="password" autocomplete="off" spellcheck="false" aria-label="접근 번호">
+      <button id="pwBtn" type="button">입장</button>
+    </div>
+    <div id="gateMsg" role="status"></div>
+    <div class="gate-foot">
+      접근 번호가 없으신가요?<br>
+      상담 신청 시 안내해 드립니다 — <a href="index.html#contact">문의하기</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= 검사 본문 ================= -->
+<main class="wrap" id="app">
 
   <div class="intro">
     <p class="eyebrow">GIFTEDNESS &amp; R&amp;E READINESS · 40 ITEMS</p>
     <h1>영재성 · R&amp;E 역량 진단</h1>
-    <p class="lede">각 문항을 읽고 평소 나의 모습과 가장 가까운 번호를 고르면 됩니다. 정답은 없고, 오래 고민하지 않고 떠오르는 대로 답할 때 결과가 더 정확합니다. 40문항을 모두 체크하면 네 영역의 프로파일이 바로 나옵니다.</p>
-
+    <p class="lede">각 문항을 읽고 평소 나의 모습과 가장 가까운 번호를 고르면 됩니다. 정답은 없고, 오래 고민하지 않고 떠오르는 대로 답할 때 결과가 더 정확합니다. 40문항을 모두 체크하면 네 영역의 프로파일 보고서가 바로 나옵니다.</p>
     <dl class="meta">
       <div><dt>문항 수</dt><dd>40</dd></div>
       <div><dt>소요 시간</dt><dd>약 12분</dd></div>
@@ -177,14 +234,9 @@ fieldset input:focus-visible + span{outline:2px solid var(--s-violet);outline-of
       <div><dt>영역</dt><dd>4</dd></div>
       <div><dt>데이터 전송</dt><dd>없음</dd></div>
     </dl>
-
     <div class="who">
-      <div>
-        <label for="name">이름 (선택)</label>
-        <input id="name" type="text" placeholder="예: 김하늘" autocomplete="off">
-      </div>
-      <div>
-        <label for="grade">학년 (선택)</label>
+      <div><label for="name">이름 (선택)</label><input id="name" type="text" placeholder="예: 김하늘" autocomplete="off"></div>
+      <div><label for="grade">학년 (선택)</label>
         <select id="grade">
           <option value="">선택 안 함</option>
           <option>초등 5학년</option><option>초등 6학년</option>
@@ -201,62 +253,126 @@ fieldset input:focus-visible + span{outline:2px solid var(--s-violet);outline-of
       <span>전혀<br>아니다</span><span>아니다</span><span>보통</span><span>그렇다</span><span>매우<br>그렇다</span>
     </div>
     <div id="items"></div>
-
     <div class="submit-row">
       <button type="submit" class="btn">진단 결과 분석하기</button>
       <span id="alert" role="status"></span>
     </div>
   </form>
 
+  <!-- ================= 결과 보고서 ================= -->
   <section id="result" aria-live="polite">
-    <div class="result-card">
-      <div class="result-head">
-        <h2>영재성 프로파일</h2>
-        <span class="who-line" id="whoLine"></span>
+    <div class="report">
+      <div class="rp-head">
+        <div class="doc"><span>STARK QUANTUM LAB · ASSESSMENT REPORT</span><span id="docNo"></span></div>
+        <h2>영재성 프로파일 보고서</h2>
+        <div class="sub">학술적 호기심 · 비판적 사고 · 창의성과 메타인지 · 탐구와 데이터 문해력 4영역 진단</div>
+      </div>
+      <dl class="rp-id" id="rpId"></dl>
+
+      <div class="rp-sec">
+        <p class="rp-label">SECTION 1 · 종합 프로파일</p>
+        <div class="radar-block">
+          <div id="radar"></div>
+          <div class="legend-list" id="legendList"></div>
+        </div>
+        <div class="total-line"><b id="totalPct">0</b><span id="totalText"></span></div>
       </div>
 
-      <div class="radar-block">
-        <div id="radar"></div>
-        <div class="legend-list" id="legendList"></div>
+      <div class="rp-sec">
+        <p class="rp-label">SECTION 2 · 영역별 상세 분석</p>
+        <div id="dcards"></div>
       </div>
 
-      <div class="total"><b id="totalPct">0</b><span id="totalText"></span></div>
-      <div id="rows"></div>
-
-      <div class="summary">
-        <h3>종합 해석</h3>
+      <div class="rp-sec summary">
+        <p class="rp-label">SECTION 3 · 종합 해석</p>
         <p id="sumText"></p>
       </div>
 
       <div class="next">
-        <h3>추천 다음 단계</h3>
+        <h3>SECTION 4 · 추천 다음 단계</h3>
         <div id="nextText"></div>
       </div>
 
       <div class="disclaimer">
-        이 검사는 자기보고식 선별 도구이며 의학적·심리학적 진단이나 표준화 검사가 아닙니다.<br>
+        본 검사는 자기보고식 선별 도구이며 의학적·심리학적 진단이나 표준화 검사가 아닙니다.<br>
         결과는 현재 시점의 학습 성향을 참고하기 위한 자료로만 사용해 주세요.<br>
         정확한 판별은 전문 기관의 표준화 검사와 상담을 통해 이루어집니다.
       </div>
     </div>
 
     <div class="submit-row" style="border-top:0">
-      <button type="button" class="btn ghost" onclick="window.print()">결과 인쇄하기</button>
+      <button type="button" class="btn ghost" onclick="window.print()">결과 보고서 인쇄</button>
       <button type="button" class="btn ghost" id="again">다시 검사하기</button>
-      <a class="btn" href="index.html#contact">상담 문의하기</a>
+      <a class="btn" href="index.html#contact">이 결과로 상담 신청하기</a>
     </div>
   </section>
 
 </main>
 
+<script src="auth.js"></script>
 <script>
+/* ==================== 접근 인증 ==================== */
+(function(){
+  const cfg = window.STARK_AUTH || {PASS_HASH:'', SESSION_KEY:'sql_test_unlocked', MAX_TRIES:5};
+  const gate = document.getElementById('gate');
+  const app = document.getElementById('app');
+  const pw = document.getElementById('pw');
+  const btn = document.getElementById('pwBtn');
+  const msg = document.getElementById('gateMsg');
+  let tries = 0;
+
+  async function sha256(str){
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return [...new Uint8Array(buf)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }
+
+  function unlock(){
+    try{ sessionStorage.setItem(cfg.SESSION_KEY,'1'); }catch(e){}
+    gate.style.display = 'none';
+    app.classList.add('on');
+    document.getElementById('counter').textContent = '0 / 40';
+    buildQuiz();
+  }
+
+  async function check(){
+    const v = pw.value;
+    if(!v){ msg.textContent = '접근 번호를 입력해 주세요.'; return; }
+    if(tries >= cfg.MAX_TRIES){ return; }
+    btn.disabled = true;
+    const h = await sha256(v);
+    if(h === cfg.PASS_HASH){
+      msg.textContent = '';
+      unlock();
+    } else {
+      tries++;
+      pw.value = '';
+      if(tries >= cfg.MAX_TRIES){
+        msg.textContent = '시도 횟수를 초과했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.';
+        pw.disabled = true;
+      } else {
+        msg.textContent = '접근 번호가 올바르지 않습니다. ('+tries+' / '+cfg.MAX_TRIES+')';
+      }
+      btn.disabled = tries >= cfg.MAX_TRIES;
+      return;
+    }
+    btn.disabled = false;
+  }
+
+  btn.addEventListener('click', check);
+  pw.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); check(); } });
+
+  let saved = false;
+  try{ saved = sessionStorage.getItem(cfg.SESSION_KEY)==='1'; }catch(e){}
+  if(saved && cfg.PASS_HASH){ unlock(); } else { pw.focus(); }
+})();
+
+/* ==================== 검사 데이터 ==================== */
 const DOMAINS = [
   {
-    key:'A', code:'DOMAIN I', color:'#5B3FD6',
-    name:'학술적 호기심 &amp; 과제 집착력',
-    plain:'학술적 호기심 · 과제 집착력',
-    axis:'호기심 · 과제집착',
+    key:'A', code:'DOMAIN I', color:'#4F38C9',
+    name:'학술적 호기심 · 과제 집착력', axis:'호기심 · 과제집착',
     desc:'관심이 생겼을 때 스스로 파고들고, 막혀도 끝까지 붙잡는 힘',
+    what:'관심 주제를 만났을 때 얼마나 깊이, 얼마나 오래 몰입하는지를 봅니다. 영재교육에서 가장 중요하게 보는 특성 중 하나로, 장기 연구 과제의 완주 가능성을 가늠하는 지표입니다.',
     items:[
       '내가 좋아하는 과학이나 수학 주제가 생기면 시간 가는 줄 모르고 찾아본다.',
       '어려운 수학 문제나 과학 원리를 만났을 때, 정답을 알아낼 때까지 포기하고 싶지 않다.',
@@ -269,16 +385,15 @@ const DOMAINS = [
       '한 번 시작한 조립이나 만들기는 끝을 봐야 직성이 풀린다.',
       '내가 세운 목표를 이루기 위해 늦게까지 매달릴 수 있다.'
     ],
-    high:'관심 주제를 만나면 스스로 시간을 쏟고, 막혀도 손을 놓지 않습니다. 한 학기 단위의 R&amp;E나 자유 연구처럼 오래 끌고 가야 하는 과제를 맡겨도 완주할 가능성이 높습니다.',
+    high:'관심 주제를 만나면 스스로 시간을 쏟고, 막혀도 손을 놓지 않습니다. 한 학기 단위의 R&E나 자유 연구처럼 오래 끌고 가야 하는 과제를 맡겨도 완주할 가능성이 높습니다.',
     mid:'흥미가 확실한 주제에서는 몰입이 잘 일어납니다. 과제를 2~3주 단위로 끊어 완주 경험을 쌓으면 집착력이 다른 영역으로도 번집니다.',
     low:'아직 한 가지에 오래 머무는 시간이 짧습니다. 짧고 확실하게 끝나는 탐구부터 시작해 "끝냈다"는 경험을 먼저 만드는 편이 좋습니다.'
   },
   {
-    key:'B', code:'DOMAIN II', color:'#0E9FA8',
-    name:'비판적 &amp; 논리적 사고력',
-    plain:'비판적 · 논리적 사고력',
-    axis:'비판 · 논리',
+    key:'B', code:'DOMAIN II', color:'#0B8E97',
+    name:'비판적 · 논리적 사고력', axis:'비판 · 논리',
     desc:'주장을 그대로 받아들이지 않고 근거와 구조로 따져 보는 힘',
+    what:'정보를 의심하고, 근거를 요구하고, 스스로도 근거를 대는 습관을 봅니다. 영재고·과학고의 서술형 평가와 구술 면접에서 직접적으로 요구되는 역량입니다.',
     items:[
       '뉴스나 영상에서 어떤 주장을 들으면 "정말 그럴까?" 하고 먼저 의심해 본다.',
       '다른 사람의 의견을 들을 때 앞뒤가 맞지 않는 점을 잘 찾아낸다.',
@@ -291,16 +406,15 @@ const DOMAINS = [
       '토론할 때 논리적으로 반박하는 것을 즐긴다.',
       '글을 읽거나 말을 들을 때 중요한 핵심과 그렇지 않은 것을 잘 구별한다.'
     ],
-    high:'근거를 요구하고 스스로도 근거를 대는 습관이 잡혀 있습니다. 영재고·과학고의 서술형과 구술 면접처럼 "왜 그렇게 생각했는지"를 묻는 평가에서 강점이 드러날 가능성이 큽니다.',
+    high:'근거를 요구하고 스스로도 근거를 대는 습관이 잡혀 있습니다. "왜 그렇게 생각했는지"를 묻는 평가에서 강점이 드러날 가능성이 큽니다.',
     mid:'답은 잘 찾지만 설명이 짧아질 때가 있습니다. 풀이 과정을 문장으로 적어 보는 훈련을 더하면 점수보다 사고의 폭이 먼저 자랍니다.',
     low:'문제를 통째로 보려다 막히는 경우가 있습니다. 조건을 하나씩 적고 나누는 연습, 그리고 "왜"를 한 번 더 묻는 습관부터 시작하면 빠르게 나아집니다.'
   },
   {
-    key:'C', code:'DOMAIN III', color:'#D9891A',
-    name:'창의성 &amp; 메타인지',
-    plain:'창의성 · 메타인지',
-    axis:'창의 · 메타인지',
+    key:'C', code:'DOMAIN III', color:'#C67C12',
+    name:'창의성 · 메타인지', axis:'창의 · 메타인지',
     desc:'새로운 길을 만들고, 자기 생각을 스스로 점검하는 힘',
+    what:'남과 다른 접근을 시도하는 확산적 사고와, 자기가 무엇을 알고 모르는지 파악하는 메타인지를 함께 봅니다. 주제를 스스로 정해야 하는 연구 활동의 출발점이 되는 역량입니다.',
     items:[
       '공부하다가 막히면 내가 무엇을 모르고 있는지 비교적 정확히 안다.',
       '문제를 풀 때 남들이 다 하는 방법 말고 나만의 방법으로 풀어 보는 것을 좋아한다.',
@@ -313,16 +427,15 @@ const DOMAINS = [
       '내가 잘하는 과목과 부족한 과목을 알고, 그에 맞게 공부 시간을 조절한다.',
       '상상화나 발명품 활동에서 독창적이라는 이야기를 들은 적이 있다.'
     ],
-    high:'아이디어의 폭이 넓고, 그 아이디어를 스스로 점검할 줄도 압니다. 주제를 직접 정하는 R&amp;E나 프로젝트형 과제에서 가장 크게 성장하는 유형입니다.',
+    high:'아이디어의 폭이 넓고, 그 아이디어를 스스로 점검할 줄도 압니다. 주제를 직접 정하는 R&E나 프로젝트형 과제에서 가장 크게 성장하는 유형입니다.',
     mid:'익숙한 방법을 먼저 쓰되 필요할 때는 바꿀 줄 압니다. "다른 방법 두 개 더 찾기" 같은 제약을 걸어 주면 사고가 눈에 띄게 확장됩니다.',
     low:'정확한 방법을 지키려는 성향이 강합니다. 정답이 여러 개인 설계 과제와 오답 되짚기 노트를 통해 부담 없이 넓혀 갈 수 있습니다.'
   },
   {
-    key:'D', code:'DOMAIN IV', color:'#BE2E6C',
-    name:'탐구 &amp; 데이터 문해력',
-    plain:'탐구 · 데이터 문해력',
-    axis:'탐구 · 데이터',
+    key:'D', code:'DOMAIN IV', color:'#AC2860',
+    name:'탐구 · 데이터 문해력', axis:'탐구 · 데이터',
     desc:'직접 확인하고, 숫자와 그래프로 말할 수 있는 힘',
+    what:'관찰과 기록의 습관, 그리고 표·그래프·수치를 읽고 만들어내는 능력을 봅니다. 실험 설계부터 보고서 작성까지, 연구 결과물의 완성도를 좌우하는 실무 역량입니다.',
     items:[
       '복잡한 표나 그래프를 보면 그 안에 숨은 의미나 규칙을 찾는 것이 재미있다.',
       '과학 실험을 할 때 결과를 눈으로 직접 확인해야 직성이 풀린다.',
@@ -335,7 +448,7 @@ const DOMAINS = [
       '하나의 현상을 관찰하기 위해 조건을 바꿔 가며 여러 번 실험해 보고 싶다.',
       '어떤 정보를 볼 때 과거부터 지금까지 어떻게 변해 왔는지 흐름을 보는 것을 좋아한다.'
     ],
-    high:'관찰과 데이터를 근거로 말할 준비가 되어 있습니다. 실험 설계와 데이터 처리까지 요구하는 R&amp;E 과제, 데이터 기반 자유 연구에 바로 들어갈 수 있는 수준입니다.',
+    high:'관찰과 데이터를 근거로 말할 준비가 되어 있습니다. 실험 설계와 데이터 처리까지 요구하는 R&E 과제에 바로 들어갈 수 있는 수준입니다.',
     mid:'결과를 해석하는 힘은 있지만 기록과 정리 방식이 아직 자리 잡히는 중입니다. 관찰 일지와 그래프 그리기를 습관으로 만들면 결과물의 완성도가 달라집니다.',
     low:'아직 숫자와 그래프가 낯선 단계입니다. 매일 한 줄 기록하는 관찰부터 시작해 데이터를 다루는 감각을 천천히 쌓는 편이 좋습니다.'
   }
@@ -344,9 +457,12 @@ const DOMAINS = [
 const SCALE = ['전혀 아니다','아니다','보통이다','그렇다','매우 그렇다'];
 const PER = 10;
 const TOTAL_ITEMS = DOMAINS.length * PER;
+let quizBuilt = false;
 
-/* ---------- 문항 렌더 ---------- */
-(function build(){
+/* ==================== 문항 렌더 (인증 후 실행) ==================== */
+function buildQuiz(){
+  if(quizBuilt) return;
+  quizBuilt = true;
   const box = document.getElementById('items');
   let n = 0;
   DOMAINS.forEach(d=>{
@@ -361,8 +477,7 @@ const TOTAL_ITEMS = DOMAINS.length * PER;
       fs.dataset.name = name;
       let opts = '<div class="opts">';
       for(let v=1;v<=5;v++){
-        opts += '<label class="opt"><input type="radio" name="'+name+'" value="'+v+'" '
-             + 'aria-label="'+SCALE[v-1]+'"><span>'+v+'</span></label>';
+        opts += '<label class="opt"><input type="radio" name="'+name+'" value="'+v+'" aria-label="'+SCALE[v-1]+'"><span>'+v+'</span></label>';
       }
       opts += '</div>';
       fs.innerHTML = '<legend><span class="n">'+String(n).padStart(2,'0')+'</span>'+text+'</legend>'+opts;
@@ -370,13 +485,11 @@ const TOTAL_ITEMS = DOMAINS.length * PER;
     });
     box.appendChild(sec);
   });
-
   const mq = window.matchMedia('(max-width:620px)');
-  const layout = () => document.querySelectorAll('.opts')
-    .forEach(o => o.style.display = mq.matches ? 'grid' : 'contents');
+  const layout = () => document.querySelectorAll('.opts').forEach(o => o.style.display = mq.matches ? 'grid' : 'contents');
   layout();
   mq.addEventListener('change', layout);
-})();
+}
 
 const form = document.getElementById('quiz');
 const bar = document.querySelector('#progress i');
@@ -424,56 +537,64 @@ form.addEventListener('submit', e=>{
   showResult();
 });
 
-/* ---------- 방사형 그래프 (SVG 직접 생성) ---------- */
+/* ==================== 방사형 그래프 ==================== */
 function radar(scores){
   const W = 520, H = 380, cx = 260, cy = 188, R = 128;
   const ang = [-90, 0, 90, 180].map(a => a*Math.PI/180);
   const pt = (i, p) => [cx + R*(p/100)*Math.cos(ang[i]), cy + R*(p/100)*Math.sin(ang[i])];
-
   let g = '';
   [20,40,60,80,100].forEach(lv=>{
     const p = [0,1,2,3].map(i=>pt(i,lv).map(v=>v.toFixed(1)).join(',')).join(' ');
-    g += '<polygon points="'+p+'" fill="none" stroke="#101F33" stroke-opacity="'+(lv===100?.28:.12)+'" stroke-width="1"/>';
+    g += '<polygon points="'+p+'" fill="none" stroke="#0E1B2C" stroke-opacity="'+(lv===100?.3:.12)+'" stroke-width="1"/>';
   });
   [0,1,2,3].forEach(i=>{
     const e = pt(i,100);
-    g += '<line x1="'+cx+'" y1="'+cy+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'" stroke="#101F33" stroke-opacity=".14"/>';
+    g += '<line x1="'+cx+'" y1="'+cy+'" x2="'+e[0].toFixed(1)+'" y2="'+e[1].toFixed(1)+'" stroke="#0E1B2C" stroke-opacity=".14"/>';
   });
-
   const poly = scores.map((s,i)=>pt(i,Math.max(s.pct,2)).map(v=>v.toFixed(1)).join(',')).join(' ');
-  g += '<polygon class="poly" points="'+poly+'" fill="rgba(91,63,214,.14)" stroke="#101F33" stroke-width="1.6" stroke-linejoin="round"/>';
-
+  g += '<polygon class="poly" points="'+poly+'" fill="rgba(79,56,201,.13)" stroke="#0E1B2C" stroke-width="1.6" stroke-linejoin="round"/>';
   scores.forEach((s,i)=>{
     const v = pt(i, Math.max(s.pct,2));
     g += '<circle cx="'+v[0].toFixed(1)+'" cy="'+v[1].toFixed(1)+'" r="4.5" fill="'+s.d.color+'"/>';
   });
-
-  const F = 'font-family=\'IBM Plex Mono, monospace\'';
   const L = [
-    {x:cx,        y:cy-R-30, a:'middle', i:0},
-    {x:cx+R+22,   y:cy-4,    a:'start',  i:1},
-    {x:cx,        y:cy+R+40, a:'middle', i:2},
-    {x:cx-R-22,   y:cy-4,    a:'end',    i:3}
+    {x:cx, y:cy-R-30, a:'middle', i:0},
+    {x:cx+R+22, y:cy-4, a:'start', i:1},
+    {x:cx, y:cy+R+40, a:'middle', i:2},
+    {x:cx-R-22, y:cy-4, a:'end', i:3}
   ];
   L.forEach(l=>{
     const s = scores[l.i];
-    g += '<text x="'+l.x+'" y="'+l.y+'" text-anchor="'+l.a+'" font-family="IBM Plex Sans KR, sans-serif" '
-       + 'font-size="13" fill="#101F33">'+s.d.axis+'</text>'
-       + '<text x="'+l.x+'" y="'+(l.y+18)+'" text-anchor="'+l.a+'" '+F+' font-size="12.5" fill="'+s.d.color+'">'
-       + s.raw+' / 50</text>';
+    g += '<text x="'+l.x+'" y="'+l.y+'" text-anchor="'+l.a+'" font-family="IBM Plex Sans KR, sans-serif" font-size="13" fill="#0E1B2C">'+s.d.axis+'</text>'
+       + '<text x="'+l.x+'" y="'+(l.y+18)+'" text-anchor="'+l.a+'" font-family="IBM Plex Mono, monospace" font-size="12.5" fill="'+s.d.color+'">'+s.raw+' / 50</text>';
   });
-
   return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="영역별 점수 방사형 그래프">'+g+'</svg>';
 }
 
-/* ---------- 결과 ---------- */
+/* 영역별 문항 응답 미니 막대그래프 */
+function miniBars(vals, color){
+  const W = 220, H = 110, bw = 16, gap = 5, base = 92, unit = 15;
+  let g = '';
+  [1,2,3,4,5].forEach(lv=>{
+    const y = base - lv*unit;
+    g += '<line x1="6" y1="'+y+'" x2="'+(W-4)+'" y2="'+y+'" stroke="#0E1B2C" stroke-opacity=".08"/>';
+  });
+  vals.forEach((v,i)=>{
+    const x = 8 + i*(bw+gap);
+    const h = v*unit;
+    g += '<rect x="'+x+'" y="'+(base-h)+'" width="'+bw+'" height="'+h+'" fill="'+color+'" fill-opacity="'+(0.45+v*0.11)+'" rx="1"/>'
+       + '<text x="'+(x+bw/2)+'" y="'+(base+13)+'" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="8.5" fill="#49586A">'+(i+1)+'</text>';
+  });
+  g += '<line x1="6" y1="'+base+'" x2="'+(W-4)+'" y2="'+base+'" stroke="#0E1B2C" stroke-opacity=".35"/>';
+  return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="문항별 응답 막대그래프">'+g+'</svg>';
+}
+
+/* ==================== 결과 ==================== */
 function showResult(){
   const scores = DOMAINS.map(d=>{
-    let raw = 0;
-    d.items.forEach((_,i)=>{
-      raw += Number(form.querySelector('input[name="'+d.key+'_'+i+'"]:checked').value);
-    });
-    return {d, raw, pct: Math.round((raw - PER) / (PER*4) * 100)};
+    const vals = d.items.map((_,i)=> Number(form.querySelector('input[name="'+d.key+'_'+i+'"]:checked').value));
+    const raw = vals.reduce((a,b)=>a+b,0);
+    return {d, vals, raw, pct: Math.round((raw - PER) / (PER*4) * 100)};
   });
 
   const avg = Math.round(scores.reduce((a,s)=>a+s.pct,0)/scores.length);
@@ -484,33 +605,59 @@ function showResult(){
   const grade = document.getElementById('grade').value;
   const t = new Date();
   const dateStr = t.getFullYear()+'.'+String(t.getMonth()+1).padStart(2,'0')+'.'+String(t.getDate()).padStart(2,'0');
-  document.getElementById('whoLine').textContent = [name || '이름 미입력', grade, dateStr].filter(Boolean).join(' · ');
+  const docNo = 'SQL-'+t.getFullYear()+String(t.getMonth()+1).padStart(2,'0')+String(t.getDate()).padStart(2,'0')
+    +'-'+String(Math.floor(Math.random()*900)+100);
+
+  document.getElementById('docNo').textContent = 'REPORT NO. '+docNo;
+  document.getElementById('rpId').innerHTML =
+      '<div><dt>이름</dt><dd>'+(name||'미입력')+'</dd></div>'
+    + '<div><dt>학년</dt><dd>'+(grade||'미입력')+'</dd></div>'
+    + '<div><dt>검사일</dt><dd>'+dateStr+'</dd></div>'
+    + '<div><dt>총 문항</dt><dd>40 / 40 응답</dd></div>';
 
   document.getElementById('radar').innerHTML = radar(scores);
-
   document.getElementById('legendList').innerHTML = scores.map(s=>
-    '<div><span class="sw" style="background:'+s.d.color+'"></span>'
-    + '<span class="nm">'+s.d.name+'</span>'
+    '<div><span class="sw" style="background:'+s.d.color+'"></span><span class="nm">'+s.d.name+'</span>'
     + '<span class="sc">'+s.raw+'<small> / 50</small></span></div>').join('');
 
   document.getElementById('totalPct').textContent = avg;
-  document.getElementById('totalText').textContent = '점 / 100 · 종합 ' + band(avg).label + ' 구간 (원점수 '
-    + scores.reduce((a,s)=>a+s.raw,0) + ' / 200)';
+  document.getElementById('totalText').textContent = '점 / 100 · 종합 '+band(avg).label+' 구간 (원점수 '
+    + scores.reduce((a,s)=>a+s.raw,0)+' / 200)';
 
-  document.getElementById('rows').innerHTML = scores.map(s=>{
+  /* 영역별 상세 카드 */
+  document.getElementById('dcards').innerHTML = scores.map(s=>{
     const b = band(s.pct);
-    return '<div class="row"><div class="rt"><h3>'+s.d.name+'</h3>'
-      + '<span class="band">'+b.label+'</span>'
-      + '<span class="pct">'+s.raw+' / 50 · '+s.pct+'점</span></div>'
-      + '<p>'+s.d[b.key]+'</p></div>';
+    const maxV = Math.max(...s.vals), minV = Math.min(...s.vals);
+    const strongIdx = s.vals.indexOf(maxV), weakIdx = s.vals.indexOf(minV);
+    let hl = '';
+    if(maxV > minV){
+      hl = '<div class="hl">'
+        + '<div><b>가장 뚜렷한 반응 · 문항 '+(strongIdx+1)+' ('+maxV+'점)</b>"'+s.d.items[strongIdx]+'"</div>'
+        + '<div><b>상대적으로 낮은 반응 · 문항 '+(weakIdx+1)+' ('+minV+'점)</b>"'+s.d.items[weakIdx]+'" — 상담 시 이 지점을 함께 살펴봅니다.</div>'
+        + '</div>';
+    } else {
+      hl = '<div class="hl"><div><b>응답 패턴</b>10개 문항이 모두 같은 수준으로 응답되어 영역 내 편차가 없습니다.</div></div>';
+    }
+    return '<div class="dcard">'
+      + '<div class="dcard-head" style="border-left-color:'+s.d.color+'">'
+      + '<div><div class="code">'+s.d.code+'</div><h3>'+s.d.name+'</h3></div>'
+      + '<span class="band" style="color:'+s.d.color+'">'+b.label+'</span>'
+      + '<span class="sc">'+s.raw+' / 50</span>'
+      + '</div>'
+      + '<div class="dcard-body">'
+      + '<figure class="dchart" style="margin:0">'+miniBars(s.vals, s.d.color)
+      + '<figcaption>문항별 응답 (1–5점)</figcaption></figure>'
+      + '<div class="dtext"><p><b>이 영역이 보는 것 —</b> '+s.d.what+'</p><p>'+s.d[b.key]+'</p>'+hl+'</div>'
+      + '</div></div>';
   }).join('');
 
-  let sum = '네 영역 평균은 '+avg+'점입니다. 가장 두드러진 영역은 <b>'+top.d.plain+'</b>('+top.raw+'/50)이고, '
-          + '지금 가장 여유가 있는 영역은 <b>'+bottom.d.plain+'</b>('+bottom.raw+'/50)입니다. ';
+  /* 종합 해석 */
+  let sum = '네 영역 평균은 '+avg+'점입니다. 가장 두드러진 영역은 <b>'+top.d.name+'</b>('+top.raw+'/50)이고, '
+          + '지금 가장 여유가 있는 영역은 <b>'+bottom.d.name+'</b>('+bottom.raw+'/50)입니다. ';
   sum += (top.pct - bottom.pct <= 15)
     ? '영역 간 차이가 크지 않아 균형이 잡혀 있습니다. 특정 영역만 따로 보완하기보다, 관심 주제 하나를 깊게 끌고 가며 네 영역을 함께 쓰는 방식이 잘 맞습니다.'
-    : '영역 간 차이가 있는 편이므로, 강점 영역을 축으로 과제를 설계하고 그 안에서 '+bottom.d.plain+'을(를) 자연스럽게 쓰게 하는 편이 효과적입니다.';
-  sum += (avg >= 70) ? ' 전반적으로 R&amp;E 같은 심화 연구 과제를 감당할 준비가 되어 있는 상태로 보입니다.'
+    : '영역 간 차이가 있는 편이므로, 강점 영역을 축으로 과제를 설계하고 그 안에서 '+bottom.d.name+' 역량을 자연스럽게 쓰게 하는 편이 효과적입니다.';
+  sum += (avg >= 70) ? ' 전반적으로 R&E 같은 심화 연구 과제를 감당할 준비가 되어 있는 상태로 보입니다.'
        : (avg >= 45) ? ' 지금은 흥미가 유지되는 범위에서 난이도를 조금씩 올려 가는 시기입니다.'
        : ' 지금은 성취 경험을 쌓는 것이 먼저입니다. 짧고 확실하게 끝나는 과제부터 권합니다.';
   document.getElementById('sumText').innerHTML = sum;
@@ -518,13 +665,13 @@ function showResult(){
   const REC = {
     A:'장기 연구 프로젝트 · 관심 주제 심화 탐구',
     B:'영재고·과학고 기출 유사 문제와 서술형 논증 훈련',
-    C:'R&amp;E 주제 설계 워크숍 · 오답 되짚기 노트',
+    C:'R&E 주제 설계 워크숍 · 오답 되짚기 노트',
     D:'실험 설계와 데이터 분석 · 보고서 작성 지도'
   };
   document.getElementById('nextText').innerHTML =
       '<p>1. 강점을 살리는 과정 — <b>'+REC[top.d.key]+'</b></p>'
     + '<p>2. 보완이 필요한 과정 — <b>'+REC[bottom.d.key]+'</b></p>'
-    + '<p>3. 결과지를 가지고 상담을 신청하면 학년과 진학 목표에 맞춘 로드맵을 함께 정리해 드립니다.</p>';
+    + '<p>3. 이 보고서(문서번호 '+docNo+')를 가지고 상담을 신청하면 학년과 진학 목표에 맞춘 로드맵을 함께 정리해 드립니다.</p>';
 
   const res = document.getElementById('result');
   res.classList.add('on');
